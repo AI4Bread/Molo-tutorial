@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>4 Basic Pipeline | Molo Pipeline</title>
+<meta name="author" content="Gaoyuan Xu in 2025.02">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="4 Basic Pipeline | Molo Pipeline">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4 Basic Pipeline | Molo Pipeline">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-141197094-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-141197094-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="(The following provides the complete workflow for running Molo Pipeline on various datasets. Copy and run the code to reproduce all results displayed on the website. Additionally, we provide...">
+<meta property="og:description" content="(The following provides the complete workflow for running Molo Pipeline on various datasets. Copy and run the code to reproduce all results displayed on the website. Additionally, we provide...">
+<meta name="twitter:description" content="(The following provides the complete workflow for running Molo Pipeline on various datasets. Copy and run the code to reproduce all results displayed on the website. Additionally, we provide...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Molo Pipeline</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="installation.html"><span class="header-section-number">2</span> Installation</a></li>
+<li><a class="" href="molo-functions.html"><span class="header-section-number">3</span> Molo Functions</a></li>
+<li><a class="active" href="basic-pipeline.html"><span class="header-section-number">4</span> Basic Pipeline</a></li>
+<li><a class="" href="web-page.html"><span class="header-section-number">5</span> Web Page</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">6</span> FAQ</a></li>
+</ul>
+
+
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="basic-pipeline" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Basic Pipeline<a class="anchor" aria-label="anchor" href="#basic-pipeline"><i class="fas fa-link"></i></a>
+</h1>
+<p>(The following provides the complete workflow for running Molo Pipeline on various datasets. Copy and run the code to reproduce all results displayed on the website. Additionally, we provide official dataset links &amp; pre-packaged molo objects that users can choose to download as needed.)</p>
+<div id="x-visium" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> 10X Visium<a class="anchor" aria-label="anchor" href="#x-visium"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements"><i class="fas fa-link"></i></a>
+</h3>
+<p>10X Visium data for Molo Pipeline must contain the <strong>filtered_feature_bc_matrix.h5</strong> file and <strong>spatial</strong> folder. The spatial folder should include three files: <strong>scalefactors_json.json</strong>, <strong>tissue_lowres_image.png</strong>, and <strong>tissue_positions_list.csv</strong>. These files are generated by Space Ranger. Below is the file structure tree for example data:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="basic-pipeline.html#cb8-1" tabindex="-1"></a><span class="ex">visium</span></span>
+<span id="cb8-2"><a href="basic-pipeline.html#cb8-2" tabindex="-1"></a><span class="ex">├──</span> filtered_feature_bc_matrix.h5</span>
+<span id="cb8-3"><a href="basic-pipeline.html#cb8-3" tabindex="-1"></a><span class="ex">└──</span> spatial</span>
+<span id="cb8-4"><a href="basic-pipeline.html#cb8-4" tabindex="-1"></a>    <span class="ex">├──</span> aligned_fiducials.jpg</span>
+<span id="cb8-5"><a href="basic-pipeline.html#cb8-5" tabindex="-1"></a>    <span class="ex">├──</span> detected_tissue_image.jpg</span>
+<span id="cb8-6"><a href="basic-pipeline.html#cb8-6" tabindex="-1"></a>    <span class="ex">├──</span> scalefactors_json.json</span>
+<span id="cb8-7"><a href="basic-pipeline.html#cb8-7" tabindex="-1"></a>    <span class="ex">├──</span> tissue_hires_image.png</span>
+<span id="cb8-8"><a href="basic-pipeline.html#cb8-8" tabindex="-1"></a>    <span class="ex">├──</span> tissue_lowres_image.png</span>
+<span id="cb8-9"><a href="basic-pipeline.html#cb8-9" tabindex="-1"></a>    <span class="ex">└──</span> tissue_positions_list.csv</span>
+<span id="cb8-10"><a href="basic-pipeline.html#cb8-10" tabindex="-1"></a>    </span></code></pre></div>
+</div>
+<div id="example-data" class="section level3" number="4.1.2">
+<h3>
+<span class="header-section-number">4.1.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>You can download public <a href="https://www.10xgenomics.com/datasets/mouse-brain-serial-section-1-sagittal-anterior-1-standard-1-1-0" target="_blank">10X Visium data</a> from here. Molo also supports cell label transfer using reference datasets (optional). For demonstration, we use Seurat-formatted <a href="https://www.dropbox.com/s/cuowvm4vrf65pvq/allen_cortex.rds?dl=1" target="_blank">mouse brain reference data</a> as an example. Here is the corresponding <a href="https://www.nature.com/articles/nn.4216" target="_blank">paper</a>.</p>
+</div>
+<div id="standard-pipeline" class="section level3" number="4.1.3">
+<h3>
+<span class="header-section-number">4.1.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"Visium"</span>, folder_path <span class="op">=</span> <span class="st">"./visium"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          molo_env <span class="op">=</span> <span class="st">"/anaconda3/envs/Molo/"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/visium/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="st">"./ref/mouse_brain.rds"</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="slide-seq-v1v2" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Slide-seq v1/v2<a class="anchor" aria-label="anchor" href="#slide-seq-v1v2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-1" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Slide-seq data for Molo Pipeline must contain <strong>raw_counts.csv.gz</strong> and <strong>spatial_info.csv.gz</strong> files. We also support data in formats like .tsv.gz and .txt.gz. Below is the file structure tree for example data:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="basic-pipeline.html#cb10-1" tabindex="-1"></a><span class="ex">slide_seq</span></span>
+<span id="cb10-2"><a href="basic-pipeline.html#cb10-2" tabindex="-1"></a><span class="ex">├──</span> raw_counts.csv.gz</span>
+<span id="cb10-3"><a href="basic-pipeline.html#cb10-3" tabindex="-1"></a><span class="ex">└──</span> spatial_info.csv.gz</span></code></pre></div>
+</div>
+<div id="example-data-1" class="section level3" number="4.2.2">
+<h3>
+<span class="header-section-number">4.2.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://singlecell.broadinstitute.org/single_cell/study/SCP354/slide-seq-study#study-summary" target="_blank">Slide-seq data</a> or <a href="https://singlecell.broadinstitute.org/single_cell/study/SCP815/sensitive-spatial-genome-wide-expression-profiling-at-cellular-resolution#study-download" target="_blank">Slide-seq v2 data</a>.</p>
+<p>(Haven’t had time to run v2 dataset yet)</p>
+</div>
+<div id="standard-pipeline-1" class="section level3" number="4.2.3">
+<h3>
+<span class="header-section-number">4.2.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"Slide-seq"</span>, folder_path <span class="op">=</span> <span class="st">"./slide_seq"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/slide_seq/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="st">"./ref/mouse_brain.rds"</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="vizgen-merfish" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Vizgen MERFISH<a class="anchor" aria-label="anchor" href="#vizgen-merfish"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-2" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Vizgen MERFISH data for Molo Pipeline must contain the <strong>cell_by_gene.csv</strong> file and <strong>cell_boundaries</strong> folder. The cell_boundaries folder should contain multiple **feature_data_*.hdf5** files. Below is the file structure tree for example data:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="basic-pipeline.html#cb12-1" tabindex="-1"></a><span class="ex">vizgen</span></span>
+<span id="cb12-2"><a href="basic-pipeline.html#cb12-2" tabindex="-1"></a><span class="ex">├──</span> cell_boundaries</span>
+<span id="cb12-3"><a href="basic-pipeline.html#cb12-3" tabindex="-1"></a><span class="ex">│</span>   ├── feature_data_0.hdf5</span>
+<span id="cb12-4"><a href="basic-pipeline.html#cb12-4" tabindex="-1"></a><span class="ex">│</span>   ├── feature_data_1.hdf5</span>
+<span id="cb12-5"><a href="basic-pipeline.html#cb12-5" tabindex="-1"></a><span class="ex">│</span>   ├── ...</span>
+<span id="cb12-6"><a href="basic-pipeline.html#cb12-6" tabindex="-1"></a><span class="ex">│</span>   └── feature_data_1225.hdf5</span>
+<span id="cb12-7"><a href="basic-pipeline.html#cb12-7" tabindex="-1"></a><span class="ex">└──</span> cell_by_gene.csv</span></code></pre></div>
+</div>
+<div id="example-data-2" class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://console.cloud.google.com/storage/browser/public-datasets-vizgen-merfish" target="_blank">Vizgen MERFISH data</a>.</p>
+</div>
+<div id="standard-pipeline-2" class="section level3" number="4.3.3">
+<h3>
+<span class="header-section-number">4.3.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-2"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"MERFISH"</span>, folder_path <span class="op">=</span> <span class="st">"./merfish"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/vizgen/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="st">"./ref/mouse_brain.rds"</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="nanostring-cosmx" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Nanostring CosMx<a class="anchor" aria-label="anchor" href="#nanostring-cosmx"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-3" class="section level3" number="4.4.1">
+<h3>
+<span class="header-section-number">4.4.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Slide-seq v2 data for Molo Pipeline requires several files. Below is the file structure tree for example data:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="basic-pipeline.html#cb14-1" tabindex="-1"></a><span class="ex">cosmx</span></span>
+<span id="cb14-2"><a href="basic-pipeline.html#cb14-2" tabindex="-1"></a><span class="ex">├──</span> Run5642_S3_Quarter_exprMat_file.csv</span>
+<span id="cb14-3"><a href="basic-pipeline.html#cb14-3" tabindex="-1"></a><span class="ex">├──</span> Run5642_S3_Quarter_fov_positions_file.csv</span>
+<span id="cb14-4"><a href="basic-pipeline.html#cb14-4" tabindex="-1"></a><span class="ex">├──</span> Run5642_S3_Quarter_metadata_file.csv</span>
+<span id="cb14-5"><a href="basic-pipeline.html#cb14-5" tabindex="-1"></a><span class="ex">├──</span> Run5642_S3_Quarter-polygons.csv</span>
+<span id="cb14-6"><a href="basic-pipeline.html#cb14-6" tabindex="-1"></a><span class="ex">└──</span> Run5642_S3_Quarter_tx_file.csv</span></code></pre></div>
+</div>
+<div id="example-data-3" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/nsclc-ffpe-dataset/" target="_blank">nanostring CosMx data</a>.</p>
+</div>
+<div id="standard-pipeline-3" class="section level3" number="4.4.3">
+<h3>
+<span class="header-section-number">4.4.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-3"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"CosMx"</span>, folder_path <span class="op">=</span> <span class="st">"./cosmx"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"human"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/cosmx/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="x-xenium" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> 10X Xenium<a class="anchor" aria-label="anchor" href="#x-xenium"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-4" class="section level3" number="4.5.1">
+<h3>
+<span class="header-section-number">4.5.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>Refer to example data.</p>
+</div>
+<div id="example-data-4" class="section level3" number="4.5.2">
+<h3>
+<span class="header-section-number">4.5.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-for-xenium-explorer-demo-1-standard" target="_blank">10X Xenium data</a>.</p>
+</div>
+<div id="standard-pipeline-4" class="section level3" number="4.5.3">
+<h3>
+<span class="header-section-number">4.5.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-4"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"Xenium"</span>, folder_path <span class="op">=</span> <span class="st">"./xenium"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/xenium/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="st">"./ref/mouse_brain.rds"</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="spatial-atac-seq" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> spatial ATAC-seq<a class="anchor" aria-label="anchor" href="#spatial-atac-seq"><i class="fas fa-link"></i></a>
+</h2>
+<div id="preprocessing" class="section level3" number="4.6.1">
+<h3>
+<span class="header-section-number">4.6.1</span> Preprocessing<a class="anchor" aria-label="anchor" href="#preprocessing"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li><p>Download SRA data from NCBI and decompress;</p></li>
+<li><p>Fill in config.yaml as instructed. Do NOT modify any files except config.yaml;</p></li>
+<li><p>Run <code>snakemake --configfile config.yaml</code> in terminal;</p></li>
+<li><p>Check fragments.tsv.gz and other output files in specified directory.</p></li>
+</ol>
+<blockquote>
+<p><em>Note: During preprocessing, you need to install CellRanger ATAC independently and fill in the installation path in config.yaml as prompted.</em></p>
+</blockquote>
+</div>
+<div id="data-requirements-5" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>Slide-seq v2 data for Molo Pipeline must contain <strong>fragments.tsv.gz</strong> and <strong>spatial</strong> folder. The spatial folder should include <strong>scalefactors_json.json</strong>, <strong>tissue_lowres_image.png</strong>, and <strong>tissue_positions_list.csv</strong>. Below is the file structure tree for example data:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="basic-pipeline.html#cb17-1" tabindex="-1"></a><span class="ex">sp_ATAC</span></span>
+<span id="cb17-2"><a href="basic-pipeline.html#cb17-2" tabindex="-1"></a><span class="ex">├──</span> fragments.tsv.gz</span>
+<span id="cb17-3"><a href="basic-pipeline.html#cb17-3" tabindex="-1"></a><span class="ex">└──</span> spatial</span>
+<span id="cb17-4"><a href="basic-pipeline.html#cb17-4" tabindex="-1"></a>    <span class="ex">├──</span> scalefactors_json.json</span>
+<span id="cb17-5"><a href="basic-pipeline.html#cb17-5" tabindex="-1"></a>    <span class="ex">├──</span> tissue_lowres_image.png</span>
+<span id="cb17-6"><a href="basic-pipeline.html#cb17-6" tabindex="-1"></a>    <span class="ex">└──</span> tissue_positions_list.csv</span></code></pre></div>
+</div>
+<div id="example-data-5" class="section level3" number="4.6.3">
+<h3>
+<span class="header-section-number">4.6.3</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM6043256" target="_blank">spatial ATAC-seq data</a>.</p>
+</div>
+<div id="standard-pipeline-5" class="section level3" number="4.6.4">
+<h3>
+<span class="header-section-number">4.6.4</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-5"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"ATAC"</span>, folder_path <span class="op">=</span> <span class="st">"./atac"</span>, ATAC_dataset <span class="op">=</span> <span class="st">"mouse"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/atac/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="st">"./ref/mouse_brain.rds"</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="codex" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> CODEX<a class="anchor" aria-label="anchor" href="#codex"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-6" class="section level3" number="4.7.1">
+<h3>
+<span class="header-section-number">4.7.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>Refer to example data.</p>
+</div>
+<div id="example-data-6" class="section level3" number="4.7.2">
+<h3>
+<span class="header-section-number">4.7.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://app.globus.org/file-manager?origin_id=af603d86-eab9-4eec-bb1d-9d26556741bb&amp;origin_path=%2Fc95d9373d698faf60a66ffdc27499fe1%2Fdrv_CX_20-008_lymphnode_n10_reg001%2Fprocessed_2020-12-2320-008LNn10r001%2Fsegm%2Fsegm-1%2Ffcs%2Fcompensated%2F&amp;two_pane=false" target="_blank">Akoya CODEX data</a>. Here is the <a href="https://portal.hubmapconsortium.org/browse/dataset/c95d9373d698faf60a66ffdc27499fe1" target="_blank">data description</a>.</p>
+</div>
+<div id="standard-pipeline-6" class="section level3" number="4.7.3">
+<h3>
+<span class="header-section-number">4.7.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-6"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"CODEX"</span>, folder_path <span class="op">=</span> <span class="st">"./codex"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"human"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/codex/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="stereo-seq" class="section level2" number="4.8">
+<h2>
+<span class="header-section-number">4.8</span> Stereo-seq<a class="anchor" aria-label="anchor" href="#stereo-seq"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-7" class="section level3" number="4.8.1">
+<h3>
+<span class="header-section-number">4.8.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-7"><i class="fas fa-link"></i></a>
+</h3>
+<p>Refer to example data.</p>
+</div>
+<div id="example-data-7" class="section level3" number="4.8.2">
+<h3>
+<span class="header-section-number">4.8.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-7"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download public <a href="https://db.cngb.org/stomics/mosta/download/" target="_blank">Stereo-seq data</a>.</p>
+</div>
+<div id="standard-pipeline-7" class="section level3" number="4.8.3">
+<h3>
+<span class="header-section-number">4.8.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-7"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"Stereo-seq"</span>, folder_path <span class="op">=</span> <span class="st">"./stereo_seq/"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/stereo_seq/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="custom" class="section level2" number="4.9">
+<h2>
+<span class="header-section-number">4.9</span> Custom<a class="anchor" aria-label="anchor" href="#custom"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-requirements-8" class="section level3" number="4.9.1">
+<h3>
+<span class="header-section-number">4.9.1</span> Data Requirements<a class="anchor" aria-label="anchor" href="#data-requirements-8"><i class="fas fa-link"></i></a>
+</h3>
+<p>Custom data for Molo Pipeline must contain matrix.parquet with optional components. Below is the file structure tree for example data:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="basic-pipeline.html#cb21-1" tabindex="-1"></a><span class="ex">custom</span></span>
+<span id="cb21-2"><a href="basic-pipeline.html#cb21-2" tabindex="-1"></a><span class="ex">├──</span> matrix.parquet</span>
+<span id="cb21-3"><a href="basic-pipeline.html#cb21-3" tabindex="-1"></a><span class="ex">├──</span> embedding.parquet<span class="er">(</span><span class="ex">optional</span><span class="kw">)</span></span>
+<span id="cb21-4"><a href="basic-pipeline.html#cb21-4" tabindex="-1"></a><span class="ex">├──</span> umap.parquet<span class="er">(</span><span class="ex">optional</span><span class="kw">)</span></span>
+<span id="cb21-5"><a href="basic-pipeline.html#cb21-5" tabindex="-1"></a><span class="ex">├──</span> meta.csv<span class="er">(</span><span class="ex">optional</span><span class="kw">)</span></span>
+<span id="cb21-6"><a href="basic-pipeline.html#cb21-6" tabindex="-1"></a><span class="ex">└──</span> spatial.csv<span class="er">(</span><span class="ex">optional</span><span class="kw">)</span></span></code></pre></div>
+<blockquote>
+<p><em>Note: Given the typically large size of matrix and embedding data, we use parquet format instead of traditional CSV for better I/O efficiency. You can create parquet files using the arrow package in R or pandas.to_parquet(engine=‘pyarrow’) in Python.</em></p>
+</blockquote>
+</div>
+<div id="example-data-8" class="section level3" number="4.9.2">
+<h3>
+<span class="header-section-number">4.9.2</span> Example Data<a class="anchor" aria-label="anchor" href="#example-data-8"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download <a href="https://drive.google.com/drive/folders/1xYrmMoqu8PElGAFYTIyL4CDseVGirCmW?usp=drive_link" target="_blank">Custom data</a> generated from DLPFC dataset.</p>
+</div>
+<div id="standard-pipeline-8" class="section level3" number="4.9.3">
+<h3>
+<span class="header-section-number">4.9.3</span> Standard Pipeline<a class="anchor" aria-label="anchor" href="#standard-pipeline-8"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">create_molo</span><span class="op">(</span><span class="st">"Custom"</span>, folder_path <span class="op">=</span> <span class="st">"./custom/"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">molo_obj</span> <span class="op">&lt;-</span> <span class="fu">Molo_Pipeline</span><span class="op">(</span><span class="va">molo_obj</span>,</span>
+<span>                          nCount_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          nFeature_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" target="_blank">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">2000</span><span class="op">)</span>,</span>
+<span>                          dataset <span class="op">=</span> <span class="st">"mouse"</span>,</span>
+<span>                          plot_path <span class="op">=</span> <span class="st">"./plots/custom/"</span>,</span>
+<span>                          labeled_ref <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                          run_Banksy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="molo-functions.html"><span class="header-section-number">3</span> Molo Functions</a></div>
+<div class="next"><a href="web-page.html"><span class="header-section-number">5</span> Web Page</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-pipeline"><span class="header-section-number">4</span> Basic Pipeline</a></li>
+<li>
+<a class="nav-link" href="#x-visium"><span class="header-section-number">4.1</span> 10X Visium</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements"><span class="header-section-number">4.1.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data"><span class="header-section-number">4.1.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline"><span class="header-section-number">4.1.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#slide-seq-v1v2"><span class="header-section-number">4.2</span> Slide-seq v1/v2</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-1"><span class="header-section-number">4.2.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-1"><span class="header-section-number">4.2.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-1"><span class="header-section-number">4.2.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#vizgen-merfish"><span class="header-section-number">4.3</span> Vizgen MERFISH</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-2"><span class="header-section-number">4.3.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-2"><span class="header-section-number">4.3.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-2"><span class="header-section-number">4.3.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#nanostring-cosmx"><span class="header-section-number">4.4</span> Nanostring CosMx</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-3"><span class="header-section-number">4.4.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-3"><span class="header-section-number">4.4.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-3"><span class="header-section-number">4.4.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#x-xenium"><span class="header-section-number">4.5</span> 10X Xenium</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-4"><span class="header-section-number">4.5.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-4"><span class="header-section-number">4.5.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-4"><span class="header-section-number">4.5.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#spatial-atac-seq"><span class="header-section-number">4.6</span> spatial ATAC-seq</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preprocessing"><span class="header-section-number">4.6.1</span> Preprocessing</a></li>
+<li><a class="nav-link" href="#data-requirements-5"><span class="header-section-number">4.6.2</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-5"><span class="header-section-number">4.6.3</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-5"><span class="header-section-number">4.6.4</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#codex"><span class="header-section-number">4.7</span> CODEX</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-6"><span class="header-section-number">4.7.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-6"><span class="header-section-number">4.7.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-6"><span class="header-section-number">4.7.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#stereo-seq"><span class="header-section-number">4.8</span> Stereo-seq</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-7"><span class="header-section-number">4.8.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-7"><span class="header-section-number">4.8.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-7"><span class="header-section-number">4.8.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#custom"><span class="header-section-number">4.9</span> Custom</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-requirements-8"><span class="header-section-number">4.9.1</span> Data Requirements</a></li>
+<li><a class="nav-link" href="#example-data-8"><span class="header-section-number">4.9.2</span> Example Data</a></li>
+<li><a class="nav-link" href="#standard-pipeline-8"><span class="header-section-number">4.9.3</span> Standard Pipeline</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="book-extra">
+  <ul class="list-unstyled">        
+      <li>
+          <a id="book-source" href="https://github.com/Molo-Y/Molo_Pipeline" target="_blank">
+              Project on Github
+              <img style="height:19px!important;margin-left:2px;vertical-align:text-bottom;" src="logo/github.svg" alt="">
+          </a>
+      </li>
+      <li>
+          <a id="book-edit" href="https://github.com/Molo-Y" target="_blank">
+              Author Home Page 
+              <img style="height:21.5px!important;margin-left:1px;vertical-align:text-bottom;" src="logo/home.svg" alt="">
+          </a>
+      </li>
+  </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5" style="background-color: #C49BEB;">
+  <style>
+    footer a {
+      color: #79DAC7;
+    }
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+    .row {
+      justify-content: center;
+    }
+  </style>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 mt-3 center-content">
+        <p>
+          <a property="dct:title" rel="cc:attributionURL" href="https://github.com/Molo-Y/Molo_Pipeline" target="_blank">Molo Pipeline</a> by 
+          <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Molo-Y" target="_blank">Xu Gaoyuan</a> is licensed under 
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-SA 4.0
+          </a>
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/cc.svg" alt="">
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/by.svg" alt="">
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/nc.svg" alt="">
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/sa.svg" alt="">
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

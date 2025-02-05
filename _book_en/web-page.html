@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>5 Web Page | Molo Pipeline</title>
+<meta name="author" content="Gaoyuan Xu in 2025.02">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="5 Web Page | Molo Pipeline">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5 Web Page | Molo Pipeline">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-141197094-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-141197094-1');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Molo Pipeline provides a Shiny-based online analysis platform that users can deploy locally to perform data analysis and visualize results through a web interface.  5.1 Molo_web You can use the...">
+<meta property="og:description" content="Molo Pipeline provides a Shiny-based online analysis platform that users can deploy locally to perform data analysis and visualize results through a web interface.  5.1 Molo_web You can use the...">
+<meta name="twitter:description" content="Molo Pipeline provides a Shiny-based online analysis platform that users can deploy locally to perform data analysis and visualize results through a web interface.  5.1 Molo_web You can use the...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Molo Pipeline</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="installation.html"><span class="header-section-number">2</span> Installation</a></li>
+<li><a class="" href="molo-functions.html"><span class="header-section-number">3</span> Molo Functions</a></li>
+<li><a class="" href="basic-pipeline.html"><span class="header-section-number">4</span> Basic Pipeline</a></li>
+<li><a class="active" href="web-page.html"><span class="header-section-number">5</span> Web Page</a></li>
+<li><a class="" href="faq.html"><span class="header-section-number">6</span> FAQ</a></li>
+</ul>
+
+
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="web-page" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Web Page<a class="anchor" aria-label="anchor" href="#web-page"><i class="fas fa-link"></i></a>
+</h1>
+<p>Molo Pipeline provides a Shiny-based online analysis platform that users can deploy locally to perform data analysis and visualize results through a web interface.</p>
+<div id="molo_web" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Molo_web<a class="anchor" aria-label="anchor" href="#molo_web"><i class="fas fa-link"></i></a>
+</h2>
+<p>You can use the <strong>Molo_web</strong> function to rapidly deploy this web interface locally for data analysis and result visualization. Below are parameter descriptions for Molo_web:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="12%">
+<col width="43%">
+<col width="7%">
+<col width="36%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Parameter Name</th>
+<th align="center">Function</th>
+<th align="center">Data Type</th>
+<th align="center">Input Example/Optional Values</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">molo_env_path</td>
+<td align="center">Specify the path to the Molo environment</td>
+<td align="center">character</td>
+<td align="center"><code>molo_env_path = "/Anaconda3/envs/Molo/"</code></td>
+</tr>
+<tr class="even">
+<td align="center">data_path</td>
+<td align="center">Specify the dataset directory</td>
+<td align="center">character</td>
+<td align="center"><code>data_path = "./data/"</code></td>
+</tr>
+<tr class="odd">
+<td align="center">plot_path</td>
+<td align="center">Specify the output path for visualization results</td>
+<td align="center">character</td>
+<td align="center"><code>plot_path = "./plots/"</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><em>Tip: All data must be stored in subfolders under data_path following <u>page instructions</u>. For example, 10X Visium data should be placed in data_path/visium. Data directly stored in data_path will NOT be recognized!</em></p>
+</blockquote>
+</div>
+<div id="web-page-installation" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Web Page Installation<a class="anchor" aria-label="anchor" href="#web-page-installation"><i class="fas fa-link"></i></a>
+</h2>
+<div id="install-shiny-server" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> <strong>Install Shiny Server</strong>:<a class="anchor" aria-label="anchor" href="#install-shiny-server"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="web-page.html#cb23-1" tabindex="-1"></a><span class="fu">sudo</span> apt-get install shiny-server</span></code></pre></div>
+</div>
+<div id="deploy-molo-pipeline-web-app" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> <strong>Deploy Molo Pipeline Web App</strong>:<a class="anchor" aria-label="anchor" href="#deploy-molo-pipeline-web-app"><i class="fas fa-link"></i></a>
+</h3>
+<p>Copy the Web App folder to Shiny Server’s application directory and restart the service:
+<code>bash sudo cp -r web_app /srv/shiny-server/ sudo systemctl restart shiny-server</code></p>
+</div>
+</div>
+<div id="running-pipeline-via-web-page-10x-visium-example" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Running Pipeline via Web Page (10X Visium Example)<a class="anchor" aria-label="anchor" href="#running-pipeline-via-web-page-10x-visium-example"><i class="fas fa-link"></i></a>
+</h2>
+<div id="access-local-webpage" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> <strong>Access Local Webpage</strong>:<a class="anchor" aria-label="anchor" href="#access-local-webpage"><i class="fas fa-link"></i></a>
+</h3>
+<p>Open a browser and navigate to <code>http://localhost:3838/web_app</code>. The interface after loading will appear as follows:</p>
+<div ><img src="web_1.png" width="100%"></div>
+<p>You can either (1) open the scRNA-seq Analyse menu and click 10X Visium (indicated by the blue arrow), or (1) directly click Analyse Directly to jump to 10X Visium analysis (indicated by the green arrow).</p>
+</div>
+<div id="configure-parameters" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> <strong>Configure Parameters</strong>:<a class="anchor" aria-label="anchor" href="#configure-parameters"><i class="fas fa-link"></i></a>
+</h3>
+<p>After opening the analysis, follow the sidebar instructions to (1) place data files, (2) set parameters, then click (3) RUN to start analysis:</p>
+<div ><img src="web_2.png" width="100%"></div>
+</div>
+<div id="execute-molo-pipeline" class="section level3" number="5.3.3">
+<h3>
+<span class="header-section-number">5.3.3</span> <strong>Execute Molo Pipeline</strong>:<a class="anchor" aria-label="anchor" href="#execute-molo-pipeline"><i class="fas fa-link"></i></a>
+</h3>
+<p>After clicking RUN, confirm execution as prompted. Do not perform any operations or close the webpage during execution to avoid unexpected errors. The runtime depends on your server performance and dataset size. Upon completion, results will display on the right. You can (1) collapse the sidebar and (2) select analysis results from the menu:</p>
+<div ><img src="web_3.png" width="100%"></div>
+<blockquote>
+<p><em>Tip: If a plot shows “Waiting for Analysis”, it indicates no valid results were generated. Please verify your data for exploratory analysis or retry with adjusted parameters.</em></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="basic-pipeline.html"><span class="header-section-number">4</span> Basic Pipeline</a></div>
+<div class="next"><a href="faq.html"><span class="header-section-number">6</span> FAQ</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#web-page"><span class="header-section-number">5</span> Web Page</a></li>
+<li><a class="nav-link" href="#molo_web"><span class="header-section-number">5.1</span> Molo_web</a></li>
+<li>
+<a class="nav-link" href="#web-page-installation"><span class="header-section-number">5.2</span> Web Page Installation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#install-shiny-server"><span class="header-section-number">5.2.1</span> Install Shiny Server:</a></li>
+<li><a class="nav-link" href="#deploy-molo-pipeline-web-app"><span class="header-section-number">5.2.2</span> Deploy Molo Pipeline Web App:</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#running-pipeline-via-web-page-10x-visium-example"><span class="header-section-number">5.3</span> Running Pipeline via Web Page (10X Visium Example)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#access-local-webpage"><span class="header-section-number">5.3.1</span> Access Local Webpage:</a></li>
+<li><a class="nav-link" href="#configure-parameters"><span class="header-section-number">5.3.2</span> Configure Parameters:</a></li>
+<li><a class="nav-link" href="#execute-molo-pipeline"><span class="header-section-number">5.3.3</span> Execute Molo Pipeline:</a></li>
+</ul>
+</li>
+</ul>
+<div class="book-extra">
+  <ul class="list-unstyled">        
+      <li>
+          <a id="book-source" href="https://github.com/Molo-Y/Molo_Pipeline" target="_blank">
+              Project on Github
+              <img style="height:19px!important;margin-left:2px;vertical-align:text-bottom;" src="logo/github.svg" alt="">
+          </a>
+      </li>
+      <li>
+          <a id="book-edit" href="https://github.com/Molo-Y" target="_blank">
+              Author Home Page 
+              <img style="height:21.5px!important;margin-left:1px;vertical-align:text-bottom;" src="logo/home.svg" alt="">
+          </a>
+      </li>
+  </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5" style="background-color: #C49BEB;">
+  <style>
+    footer a {
+      color: #79DAC7;
+    }
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+    .row {
+      justify-content: center;
+    }
+  </style>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 mt-3 center-content">
+        <p>
+          <a property="dct:title" rel="cc:attributionURL" href="https://github.com/Molo-Y/Molo_Pipeline" target="_blank">Molo Pipeline</a> by 
+          <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Molo-Y" target="_blank">Xu Gaoyuan</a> is licensed under 
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-SA 4.0
+          </a>
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/cc.svg" alt="">
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/by.svg" alt="">
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/nc.svg" alt="">
+            <img style="height:20px!important;margin-left:3px;vertical-align:text-bottom;" src="logo/sa.svg" alt="">
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
