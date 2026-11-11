@@ -31,6 +31,8 @@ class ArchitectureAndMirrorTests(unittest.TestCase):
                          "[R](r-functions.md#x) [HTTP](api.md) [external](https://example.org/api.md)")
         self.assertEqual(exporter.PAGE_MAP["web.md"], "web-workflow.md")
         self.assertEqual(exporter.PAGE_MAP["FAQ.md"], "faq.md")
+        self.assertEqual(exporter.rewrite_links("[HTTP](../http-api.md)", "reference/http-routes.md"),
+                         "[HTTP](../api.md)")
 
     def test_mirror_hashes_and_every_page_covered(self):
         files = exporter.export_files()

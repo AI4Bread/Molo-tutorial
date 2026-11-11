@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import posixpath
 import re
 import subprocess
 from urllib.parse import urlsplit
@@ -32,14 +33,16 @@ PAGE_MAP = {
 }
 
 
-def rewrite_links(text):
+def rewrite_links(text, source="index.md"):
     # Only relative Markdown destinations; preserve code and external URLs.
     def replace(match):
         url = match[1]
         parsed = urlsplit(url)
-        if parsed.scheme or parsed.netloc or parsed.path not in PAGE_MAP:
+        canonical = posixpath.normpath(posixpath.join(posixpath.dirname(source), parsed.path))
+        if parsed.scheme or parsed.netloc or not parsed.path or canonical not in PAGE_MAP:
             return match[0]
-        return "](" + PAGE_MAP[parsed.path] + ("#" + parsed.fragment if parsed.fragment else "") + ")"
+        target = posixpath.relpath(PAGE_MAP[canonical], posixpath.dirname(PAGE_MAP[source]) or ".")
+        return "](" + target + ("?" + parsed.query if parsed.query else "") + ("#" + parsed.fragment if parsed.fragment else "") + ")"
     return re.sub(r"\]\(([^\s)]+)\)", replace, text)
 
 
@@ -56,7 +59,7 @@ def export_files():
     actual = {p.relative_to(docs).as_posix() for p in docs.rglob("*.md")}
     if actual != set(PAGE_MAP):
         raise ValueError(f"Review page mapping after adding/removing pages: {actual ^ set(PAGE_MAP)}")
-    files = {"source_en/" + target: rewrite_links((docs / source).read_text()).encode()
+    files = {"source_en/" + target: rewrite_links((docs / source).read_text(), source).encode()
              for source, target in PAGE_MAP.items()}
     for asset in (docs / "assets").rglob("*"):
         if asset.is_file():
