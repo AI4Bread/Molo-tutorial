@@ -86,6 +86,13 @@ class DocumentationContractTests(unittest.TestCase):
         for name in ["index", "introduction", "installation", "api", "basic_pipeline", "web", "FAQ"]:
             self.assertTrue((ROOT / "docs" / (name + ".md")).is_file())
 
+    def test_ci_cache_uses_the_actual_documentation_requirements(self):
+        workflow = yaml.safe_load((ROOT / ".github/workflows/docs.yml").read_text())
+        setup = next(s for s in workflow["jobs"]["docs"]["steps"]
+                     if s.get("uses", "").startswith("actions/setup-python@"))
+        self.assertEqual(setup["with"]["cache-dependency-path"], "requirements-docs.txt")
+        self.assertTrue((ROOT / setup["with"]["cache-dependency-path"]).is_file())
+
     def test_python_examples_are_syntactically_valid(self):
         count = 0
         for path in (ROOT / "docs").rglob("*.md"):
