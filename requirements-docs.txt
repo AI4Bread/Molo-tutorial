@@ -1,0 +1,5 @@
+# Documentation-only dependencies, matched to the existing successful docs toolchain.
+# These are NOT the Molo scientific runtime dependencies.
+mkdocs==1.6.1
+mkdocs-material==9.5.49
+pymdown-extensions==10.21.3

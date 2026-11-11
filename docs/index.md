@@ -1,11 +1,37 @@
-# Welcome
+# Molo Documentation
 
-Welcome to Molo Pipeline!
+**Current-source documentation · 2026-11-11 · FastAPI application 1.6.0**
 
-<img src="molo_cover.jpg" class="cover" width="200" height="250"/>Spatial multi-omics analysis, as a crucial research direction in bioinformatics, has seen the emergence of various efficient analytical tools based on different programming languages, including Seurat, Scanpy, CellChat, and Monocle. However, existing tools generally face two application limitations: First, users require programming expertise and must repeatedly learn different toolkits' operational specifications; Second, cross-platform data interoperability barriers make it difficult to coordinate R and Python ecosystem tools, significantly compromising workflow integrity and efficiency. These challenges collectively form technical barriers in spatial multi-omics analysis, constraining its broader applications.
+Molo connects spatial-omics object creation, physical alignment, pairwise latent
+integration, and downstream biological analysis. The current online application
+uses **FastAPI, Celery, Redis, and SQLite**, not the historical Shiny web interface.
 
-To address these issues, our developed Molo Pipeline platform establishes a standardized spatial multi-omics analysis framework. The platform integrates complete workflows for data preprocessing, fundamental analysis, and visualization through an interactive graphical interface, effectively lowering technical barriers. Its core advantage lies in breakthrough data compatibility - Molo analysis objects can be losslessly converted into Seurat, CellChat, SpatialFeatureExperiment, CDS(monocle-v3), and anndata(Scanpy/Squidpy) formats, achieving seamless cross-platform data transition. This dual functionality caters to basic analysis needs for novices while providing flexible technical support for professionals conducting multidimensional exploratory research.
+[Open Molo](https://molo.ai4bread.com/){ .md-button .md-button--primary }
+[Web workflow](web.md){ .md-button }
+[R functions](api.md){ .md-button }
 
-Regarding deep learning integration, Molo Pipeline innovatively implements systematic interoperability with the PyTorch framework. The platform's built-in intelligent data integration algorithms demonstrate significant advantages in public dataset validations, with spatial alignment accuracy and batch effect correction efficacy surpassing existing mainstream algorithms. Through meticulously designed R-PyTorch interface encapsulation, users can conveniently leverage cutting-edge neural network frameworks for advanced analysis while maintaining seamless connectivity with existing R-based analytical workflows.
+## Choose your workflow
 
-We anticipate that Molo Pipeline, through its technological breakthroughs and innovative design, will provide researchers in spatial multi-omics with more efficient and flexible analytical tools, facilitating groundbreaking advancements in related studies. 
+| You want to… | Start here |
+| --- | --- |
+| Use the hosted site without installing software | [Web workflow](web.md) |
+| Prepare platform-specific input | [Data preparation](data-preparation.md) |
+| Run R functions on your own data | [Basic R pipeline](basic_pipeline.md), [R reference](api.md) |
+| Run the pairwise Python core | [Python CLI](python-cli.md) |
+| Automate authenticated web requests | [HTTP API](http-api.md) |
+| Understand defaults and tune integration | [Defaults and tuning](parameters.md) |
+| Deploy and maintain a server | [Server deployment](deployment.md) |
+
+!!! important "Two different API references"
+    The preserved `/api/` address is the **R function reference**. Web HTTP routes
+    and authentication are covered separately in [HTTP API](http-api.md).
+
+## Before interpreting a result
+
+Physical alignment of several slices is not full multi-batch latent integration;
+the latter currently accepts **two batches**. Review the
+[outputs and limitations](results.md) and [source provenance](provenance.md).
+
+The alternate application address [molopipeline.site](https://molopipeline.site/)
+remains available. Chinese documentation is retained at the
+[separate bilingual guide](https://docs.molopipeline.site/).

@@ -1,10 +1,58 @@
-theme: readthedocs
 site_name: Molo Documentation
+site_description: Current Molo spatial-omics workflow, R functions, Python CLI, and FastAPI reference
+site_url: https://molo-docs.readthedocs.io/en/latest/
+repo_url: https://github.com/AI4Bread/Molo-tutorial
+repo_name: AI4Bread/Molo-tutorial
+edit_uri: edit/main/docs/
+docs_dir: docs
+site_dir: site
+strict: true
+theme:
+  name: material
+  language: en
+  logo: assets/molo.svg
+  favicon: assets/molo.svg
+  palette:
+    primary: teal
+    accent: amber
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - search.highlight
+plugins:
+  - search:
+      lang: en
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
 nav:
   - Home: index.md
-  - Introduction: introduction.md
-  - Installation: installation.md
-  - Functions: api.md
-  - Basic Pipeline: basic_pipeline.md
-  - Web Page: web.md
-  - FAQ: FAQ.md
+  - Get started:
+      - Introduction: introduction.md
+      - Installation: installation.md
+      - Data preparation: data-preparation.md
+      - Web workflow: web.md
+      - Basic R pipeline: basic_pipeline.md
+  - Reference:
+      - R functions: api.md
+      - Complete R parameters: reference/r-parameters.md
+      - Python CLI: python-cli.md
+      - Complete CLI options: reference/cli-options.md
+      - HTTP API: http-api.md
+      - Complete HTTP routes: reference/http-routes.md
+      - Defaults and tuning: parameters.md
+      - Results and limitations: results.md
+  - Operations:
+      - Server deployment: deployment.md
+      - Documentation maintenance: documentation-maintenance.md
+      - Version and source provenance: provenance.md
+      - FAQ: FAQ.md
+extra:
+  generator: false

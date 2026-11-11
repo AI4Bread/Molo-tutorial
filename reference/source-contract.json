@@ -1,0 +1,1904 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-11-11",
+  "web_app_version": "1.6.0",
+  "scope": "read-only working-source snapshot; no scientific execution; source tree is dirty",
+  "source_repository": "https://github.com/AI4Bread/Molo",
+  "source_base_commit": "878014a82d75732b5795008378311b000dc897d6",
+  "files_sha256": {
+    "Molo_FastAPI/app/celery_app.py": "4e8a655914179d80b5176c0fda14cd017fddc48f93c43f739e46b496209b366a",
+    "Molo_FastAPI/app/config/downstream.example.yaml": "854aa6d67b05741c6084d7cef533865d86774d0f9d4e851e40178aadac818d53",
+    "Molo_FastAPI/app/core/R/integrate/molo_integrate_v3_DLPFC_LA+MLP.R": "d60abbd1d5ca7be04978f26f3c985791aceed121c7f810b1438cdb81311fe752",
+    "Molo_FastAPI/app/core/R/molo_analysis.R": "98a6f05271aad07ed3fe9971c7877ffbcdc42f8b700244031b156f753feb67d1",
+    "Molo_FastAPI/app/core/R/molo_convert.R": "6b198061671b2f4f229bc78438ff2c32cb9b792e0b32b1f210b642ba6d93e9d0",
+    "Molo_FastAPI/app/core/R/molo_pipeline.R": "c5d542b0aae7fc2478981f9c9d33e1d034dc3506bbbdfc651283b7d8dc7585ca",
+    "Molo_FastAPI/app/core/R/run_alignment_wrapper.R": "5256bb5c4a7be494874802d8cc101510fd9d41458d40cc4cd2c5a966d60e3f74",
+    "Molo_FastAPI/app/core/python/main_process.py": "3b841b5158cd4227ac113b8589c84ee33ae83e43fa521c2d72769465f0e08a0a",
+    "Molo_FastAPI/app/core/python/molo_defaults.py": "6f05cd97275152af9e052d164563e81a28e8ca0d72f0c0e42c9683a376348cfd",
+    "Molo_FastAPI/app/core/python/molo_tuner.py": "1918966690f548f95d1edb3bb0411cbef1eadd91ce8b584fe758f82984d1712f",
+    "Molo_FastAPI/app/main.py": "a7e41f4329d0aa5359bbd85e39bec69e5c284f7f26524c50ffa69284c2c008de",
+    "Molo_FastAPI/app/routers/alignment.py": "320d5c96d7aba24f831b602d9e34b47471fba01766ff7abd0788a05dbbd153ab",
+    "Molo_FastAPI/app/routers/auth.py": "422c4f58854a6f1519e4a28c2730c11c01a60b27ea534d8543e4da26b689ac95",
+    "Molo_FastAPI/app/routers/chains.py": "0fb2b71e0a355c820b48a5e7731d2759e4d4ab8fddc7d7ed1f17aa2dc247213b",
+    "Molo_FastAPI/app/routers/downstream.py": "5198bed42935088914b9d7f47d183602cb63ca8d1aa9a6157373e815f8aacbb4",
+    "Molo_FastAPI/app/routers/home.py": "defcb0d47508bc750b8604e5040db1b3572f07e2a20a4a932d11d58324d5295b",
+    "Molo_FastAPI/app/routers/info.py": "148197f11034cde9ef2e70dc9eb2ac096a7bc092599b752a5f2af827268daaa3",
+    "Molo_FastAPI/app/routers/jobs.py": "a79b92f23e60bcdf9bf94623f64e887311b5d66627d037486e8ccb2e319878e8",
+    "Molo_FastAPI/app/routers/projects.py": "7ba1d892d6377145a2260a7baf6785389918f2507866baa57b4abe7ce968ae90",
+    "Molo_FastAPI/app/routers/reviewer.py": "fa29f473a44ee82f4aca945a29c87e6d8515317090dd89fa29d5fa4f7d5a91f4",
+    "Molo_FastAPI/app/routers/tutorial.py": "efedb1044c5240e38929f538f0b0baeee08fc010adc21c68cec915bf8b97184f",
+    "Molo_FastAPI/app/services/alignment_service.py": "20db1d044cf2d263199f409b8b146e47fd88f8df656c1301699323a99f21887c",
+    "Molo_FastAPI/app/services/app_settings.py": "7703411773ec7efe5a5ea43ed73bc99130bf734dae4f80201b1d6b5c732f7a92",
+    "Molo_FastAPI/app/services/auth_service.py": "6c20e3fd37dfdda45093fec32903f58309f2ee6358b4b9887c939eb8e8785487",
+    "Molo_FastAPI/app/services/dataset_validator.py": "0eb2933bcc13d72e7ec2475ede048d8558b21839c243adf6de26e4f331808f42",
+    "Molo_FastAPI/app/services/reviewer_mode.py": "63c1df679fe3afac53f74329ffbcdc4caba3399218e0efe23978fa9546dd702b",
+    "Molo_FastAPI/app/services/runtime_settings.py": "45191bdd959c841df875ed836dfaab26ececa4dea1e5966e2cde4faf3d61687f",
+    "Molo_FastAPI/requirements.txt": "5cc96130b7b6b807c5dba754ed88251c6b320b88777fb63ad3dcb5b5b9c58d9e"
+  },
+  "r_functions": [
+    {
+      "name": "Molo_Convert",
+      "source": "Molo_FastAPI/app/core/R/molo_convert.R",
+      "line": 268,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "start",
+          "default": "\"Seurat\""
+        },
+        {
+          "name": "end",
+          "default": "\"Molo\""
+        },
+        {
+          "name": "data_type",
+          "default": "\"Visium\""
+        },
+        {
+          "name": "assay",
+          "default": "\"Molo\""
+        },
+        {
+          "name": "folder_path",
+          "default": null
+        }
+      ]
+    },
+    {
+      "name": "Molo_Create",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 2012,
+      "parameters": [
+        {
+          "name": "data_type",
+          "default": "\"Visium\""
+        },
+        {
+          "name": "folder_path",
+          "default": "\"./\""
+        },
+        {
+          "name": "n_cells",
+          "default": "NULL"
+        },
+        {
+          "name": "n_features",
+          "default": "NULL"
+        },
+        {
+          "name": "ATAC_dataset",
+          "default": "\"mouse\""
+        },
+        {
+          "name": "ATAC_arrow_files",
+          "default": "NULL"
+        },
+        {
+          "name": "CODEX_type",
+          "default": "\"processor\""
+        },
+        {
+          "name": "softmax",
+          "default": "FALSE"
+        },
+        {
+          "name": "custom_index",
+          "default": "\"__index_level_0__\""
+        }
+      ]
+    },
+    {
+      "name": "Molo_Integrate",
+      "source": "Molo_FastAPI/app/core/R/integrate/molo_integrate_v3_DLPFC_LA+MLP.R",
+      "line": 108,
+      "parameters": [
+        {
+          "name": "obj_list",
+          "default": null
+        },
+        {
+          "name": "var_features",
+          "default": "3000"
+        },
+        {
+          "name": "py_path",
+          "default": "Sys.which(\"python\")"
+        },
+        {
+          "name": "device",
+          "default": "\"cuda:1\""
+        },
+        {
+          "name": "save_path",
+          "default": "\"./molo_save/\""
+        },
+        {
+          "name": "pretrain_epoch",
+          "default": "100"
+        },
+        {
+          "name": "train_epoch",
+          "default": "300"
+        },
+        {
+          "name": "tmp",
+          "default": "\"./_molo_tmp/\""
+        },
+        {
+          "name": "sp_alignment",
+          "default": "\"Molo+LPGW\""
+        },
+        {
+          "name": "lpgw_ref_idx",
+          "default": "\"0\""
+        },
+        {
+          "name": "gene_align_alpha",
+          "default": "0.1"
+        },
+        {
+          "name": "gene_glmpca_latent_dim",
+          "default": "50"
+        },
+        {
+          "name": "gene_overlap_frac",
+          "default": "0.9"
+        },
+        {
+          "name": "edge_type",
+          "default": "\"together\""
+        },
+        {
+          "name": "plot_3D_width",
+          "default": "8.0"
+        },
+        {
+          "name": "plot_3D_height",
+          "default": "6.0"
+        },
+        {
+          "name": "plot_3D_spot_size",
+          "default": "0.5"
+        },
+        {
+          "name": "dist_threshold",
+          "default": "NULL"
+        },
+        {
+          "name": "pis_path",
+          "default": "NULL"
+        },
+        {
+          "name": "sp_alignment_s",
+          "default": "0.7"
+        },
+        {
+          "name": "use_harmony",
+          "default": "FALSE"
+        },
+        {
+          "name": "compute_iLISI",
+          "default": "TRUE"
+        },
+        {
+          "name": "edge_sp",
+          "default": "10"
+        },
+        {
+          "name": "edge_mtx",
+          "default": "10"
+        },
+        {
+          "name": "hidden_dims",
+          "default": "250"
+        },
+        {
+          "name": "reduction_dims",
+          "default": "30"
+        },
+        {
+          "name": "shared_dims",
+          "default": "20"
+        },
+        {
+          "name": "mse_loss",
+          "default": "1.0"
+        },
+        {
+          "name": "rec_loss",
+          "default": "1"
+        },
+        {
+          "name": "mnn_loss",
+          "default": "0.9086822346479394"
+        },
+        {
+          "name": "nc_loss",
+          "default": "8.21865755284329"
+        },
+        {
+          "name": "gme_loss",
+          "default": "0.2881476150721262"
+        },
+        {
+          "name": "la_loss",
+          "default": "0.9340807418916036"
+        },
+        {
+          "name": "shared_scale",
+          "default": "0.06947880705627452"
+        },
+        {
+          "name": "private_scale",
+          "default": "0.3844879738634757"
+        },
+        {
+          "name": "sample_size",
+          "default": "512"
+        },
+        {
+          "name": "molo_alignment_route",
+          "default": "\"auto\""
+        },
+        {
+          "name": "alignment_only",
+          "default": "FALSE"
+        },
+        {
+          "name": "tuning_mode",
+          "default": "\"none\""
+        },
+        {
+          "name": "tune_preset",
+          "default": "\"default\""
+        },
+        {
+          "name": "tune_trials",
+          "default": "0"
+        },
+        {
+          "name": "tuning_objective",
+          "default": "\"auto\""
+        },
+        {
+          "name": "verbose",
+          "default": "TRUE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_Pipeline",
+      "source": "Molo_FastAPI/app/core/R/molo_pipeline.R",
+      "line": 27,
+      "parameters": [
+        {
+          "name": "molo_obj",
+          "default": "NULL"
+        },
+        {
+          "name": "only_QC",
+          "default": "FALSE"
+        },
+        {
+          "name": "steps",
+          "default": "c(\"reduction_clustering\", \"var_features\", \"top_GO_terms\", \"cellchat\", \"traj_infer\")"
+        },
+        {
+          "name": "atac_steps",
+          "default": "5"
+        },
+        {
+          "name": "nCount_range",
+          "default": "NULL"
+        },
+        {
+          "name": "nFeature_range",
+          "default": "NULL"
+        },
+        {
+          "name": "plot_path",
+          "default": "\"./plots/\""
+        },
+        {
+          "name": "dataset",
+          "default": "\"mouse\""
+        },
+        {
+          "name": "molo_env",
+          "default": "\"/user/Anaconda3/envs/Molo/\""
+        },
+        {
+          "name": "labeled_ref",
+          "default": "NULL"
+        },
+        {
+          "name": "run_Banksy",
+          "default": "FALSE"
+        },
+        {
+          "name": "save_type",
+          "default": "\"graph\""
+        },
+        {
+          "name": "image_alpha",
+          "default": "1"
+        },
+        {
+          "name": "pt_size",
+          "default": "1.5"
+        },
+        {
+          "name": "var_features",
+          "default": "NULL"
+        },
+        {
+          "name": "sp_var_features",
+          "default": "FALSE"
+        },
+        {
+          "name": "plot_cols",
+          "default": "NULL"
+        },
+        {
+          "name": "show_progress",
+          "default": "FALSE"
+        },
+        {
+          "name": "return_obj",
+          "default": "TRUE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_cell_chat",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 114,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "plot_cols",
+          "default": "NULL"
+        },
+        {
+          "name": "dataset",
+          "default": "\"mouse\""
+        },
+        {
+          "name": "molo_plot_path",
+          "default": null
+        },
+        {
+          "name": "font_size",
+          "default": "NULL"
+        },
+        {
+          "name": "show_progress",
+          "default": "FALSE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_reduction_1",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 79,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "molo_env",
+          "default": null
+        },
+        {
+          "name": "molo_plot_path",
+          "default": null
+        }
+      ]
+    },
+    {
+      "name": "Molo_reduction_cluster",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 86,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "only_QC",
+          "default": "FALSE"
+        },
+        {
+          "name": "nFeature_range",
+          "default": "c(10, 2500)"
+        },
+        {
+          "name": "nCount_range",
+          "default": "c(10,2500)"
+        },
+        {
+          "name": "molo_env",
+          "default": "\"/user/anaconda3/envs/Molo/\""
+        },
+        {
+          "name": "labeled_ref",
+          "default": "NULL"
+        },
+        {
+          "name": "molo_plot_path",
+          "default": null
+        },
+        {
+          "name": "save_type",
+          "default": "\"graph\""
+        },
+        {
+          "name": "run_Banksy",
+          "default": "FALSE"
+        },
+        {
+          "name": "image_alpha",
+          "default": "1"
+        },
+        {
+          "name": "pt_size",
+          "default": "2"
+        },
+        {
+          "name": "atac_steps",
+          "default": "5"
+        },
+        {
+          "name": "resolution",
+          "default": "0.5"
+        },
+        {
+          "name": "n_neighbors",
+          "default": "20"
+        },
+        {
+          "name": "show_progress",
+          "default": "FALSE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_save_data",
+      "source": "Molo_FastAPI/app/core/R/integrate/molo_integrate_v3_DLPFC_LA+MLP.R",
+      "line": 1,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "var_features",
+          "default": "3000"
+        },
+        {
+          "name": "folder_path",
+          "default": "\"./_molo_tmp/\""
+        },
+        {
+          "name": "prefer_sct",
+          "default": "TRUE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_top_GO_terms",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 104,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "dataset",
+          "default": "\"mouse\""
+        },
+        {
+          "name": "plot_cols",
+          "default": "NULL"
+        },
+        {
+          "name": "molo_plot_path",
+          "default": null
+        },
+        {
+          "name": "font_size",
+          "default": "NULL"
+        },
+        {
+          "name": "show_progress",
+          "default": "FALSE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_traj",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 124,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "plot_cols",
+          "default": "NULL"
+        },
+        {
+          "name": "molo_plot_path",
+          "default": null
+        },
+        {
+          "name": "show_progress",
+          "default": "FALSE"
+        }
+      ]
+    },
+    {
+      "name": "Molo_var_features",
+      "source": "Molo_FastAPI/app/core/R/molo_analysis.R",
+      "line": 59,
+      "parameters": [
+        {
+          "name": "obj",
+          "default": null
+        },
+        {
+          "name": "features",
+          "default": "NULL"
+        },
+        {
+          "name": "sp_var_features",
+          "default": "FALSE"
+        },
+        {
+          "name": "molo_plot_path",
+          "default": null
+        },
+        {
+          "name": "save_type",
+          "default": "\"graph\""
+        },
+        {
+          "name": "font_size",
+          "default": "NULL"
+        },
+        {
+          "name": "image_alpha",
+          "default": "1"
+        },
+        {
+          "name": "pt_size",
+          "default": "2"
+        },
+        {
+          "name": "show_progress",
+          "default": "FALSE"
+        }
+      ]
+    }
+  ],
+  "python_cli": [
+    {
+      "flags": [
+        "-data_path"
+      ],
+      "dest": "data_path",
+      "default": "required",
+      "type": "str",
+      "line": 331
+    },
+    {
+      "flags": [
+        "-save_path"
+      ],
+      "dest": "save_path",
+      "default": "required",
+      "type": "str",
+      "line": 332
+    },
+    {
+      "flags": [
+        "-device"
+      ],
+      "dest": "device",
+      "default": "'cuda:1'",
+      "type": "str",
+      "line": 333
+    },
+    {
+      "flags": [
+        "-pre_train_epoch"
+      ],
+      "dest": "pre_train_epoch",
+      "default": "200",
+      "type": "int",
+      "line": 335
+    },
+    {
+      "flags": [
+        "-train_epoch"
+      ],
+      "dest": "train_epoch",
+      "default": "600",
+      "type": "int",
+      "line": 336
+    },
+    {
+      "flags": [
+        "-sp_alignment"
+      ],
+      "dest": "sp_alignment",
+      "default": "'Molo'",
+      "type": "str",
+      "line": 338
+    },
+    {
+      "flags": [
+        "-plot_3D_width"
+      ],
+      "dest": "plot_3D_width",
+      "default": "8.0",
+      "type": "float",
+      "line": 339
+    },
+    {
+      "flags": [
+        "-plot_3D_height"
+      ],
+      "dest": "plot_3D_height",
+      "default": "6.0",
+      "type": "float",
+      "line": 340
+    },
+    {
+      "flags": [
+        "-plot_3D_spot_size"
+      ],
+      "dest": "plot_3D_spot_size",
+      "default": "0.5",
+      "type": "float",
+      "line": 341
+    },
+    {
+      "flags": [
+        "-dist_threshold"
+      ],
+      "dest": "dist_threshold",
+      "default": "None",
+      "type": "string/untyped",
+      "line": 342
+    },
+    {
+      "flags": [
+        "-paste2_pis_path"
+      ],
+      "dest": "pis_path",
+      "default": "None",
+      "type": "str",
+      "line": 343
+    },
+    {
+      "flags": [
+        "-sp_alignment_s"
+      ],
+      "dest": "sp_alignment_s",
+      "default": "0.7",
+      "type": "float",
+      "line": 344
+    },
+    {
+      "flags": [
+        "-use_harmony"
+      ],
+      "dest": "use_harmony",
+      "default": "0",
+      "type": "int",
+      "line": 345
+    },
+    {
+      "flags": [
+        "-compute_iLISI"
+      ],
+      "dest": "compute_iLISI",
+      "default": "0",
+      "type": "int",
+      "line": 346
+    },
+    {
+      "flags": [
+        "-alignment_only"
+      ],
+      "dest": "alignment_only",
+      "default": "0",
+      "type": "int",
+      "line": 347
+    },
+    {
+      "flags": [
+        "-lpgw_overlap_frac"
+      ],
+      "dest": "lpgw_overlap_frac",
+      "default": "0.7",
+      "type": "float",
+      "line": 350
+    },
+    {
+      "flags": [
+        "-lpgw_loss"
+      ],
+      "dest": "lpgw_loss",
+      "default": "'square'",
+      "type": "str",
+      "line": 351
+    },
+    {
+      "flags": [
+        "-lpgw_ref_idx"
+      ],
+      "dest": "lpgw_ref_idx",
+      "default": "0",
+      "type": "int",
+      "line": 352
+    },
+    {
+      "flags": [
+        "-gene_align_alpha"
+      ],
+      "dest": "gene_align_alpha",
+      "default": "0.1",
+      "type": "float",
+      "line": 353
+    },
+    {
+      "flags": [
+        "-gene_glmpca_latent_dim"
+      ],
+      "dest": "gene_glmpca_latent_dim",
+      "default": "50",
+      "type": "int",
+      "line": 354
+    },
+    {
+      "flags": [
+        "-gene_overlap_frac"
+      ],
+      "dest": "gene_overlap_frac",
+      "default": "0.9",
+      "type": "float",
+      "line": 355
+    },
+    {
+      "flags": [
+        "-molo_alignment_route"
+      ],
+      "dest": "molo_alignment_route",
+      "default": "'auto'",
+      "type": "str",
+      "line": 356
+    },
+    {
+      "flags": [
+        "-edge_type"
+      ],
+      "dest": "edge_type",
+      "default": "'together'",
+      "type": "str",
+      "line": 358
+    },
+    {
+      "flags": [
+        "-edge_sp"
+      ],
+      "dest": "edge_sp",
+      "default": "10",
+      "type": "int",
+      "line": 359
+    },
+    {
+      "flags": [
+        "-edge_mtx"
+      ],
+      "dest": "edge_mtx",
+      "default": "10",
+      "type": "int",
+      "line": 360
+    },
+    {
+      "flags": [
+        "-h_dims"
+      ],
+      "dest": "hidden_dims",
+      "default": "250",
+      "type": "int",
+      "line": 361
+    },
+    {
+      "flags": [
+        "-r_dims"
+      ],
+      "dest": "reduction_dims",
+      "default": "30",
+      "type": "int",
+      "line": 362
+    },
+    {
+      "flags": [
+        "-shared_dims"
+      ],
+      "dest": "shared_dims",
+      "default": "20",
+      "type": "int",
+      "line": 365
+    },
+    {
+      "flags": [
+        "-mse"
+      ],
+      "dest": "mse",
+      "default": "1.0",
+      "type": "float",
+      "line": 367
+    },
+    {
+      "flags": [
+        "-rec"
+      ],
+      "dest": "rec",
+      "default": "1",
+      "type": "float",
+      "line": 368
+    },
+    {
+      "flags": [
+        "-mnn"
+      ],
+      "dest": "mnn",
+      "default": "0.9086822346479394",
+      "type": "float",
+      "line": 369
+    },
+    {
+      "flags": [
+        "-nc"
+      ],
+      "dest": "nc",
+      "default": "8.21865755284329",
+      "type": "float",
+      "line": 370
+    },
+    {
+      "flags": [
+        "-gme"
+      ],
+      "dest": "gme",
+      "default": "0.2881476150721262",
+      "type": "float",
+      "line": 371
+    },
+    {
+      "flags": [
+        "-la"
+      ],
+      "dest": "la",
+      "default": "0.9340807418916036",
+      "type": "float",
+      "line": 372
+    },
+    {
+      "flags": [
+        "-shared_scale"
+      ],
+      "dest": "shared_scale",
+      "default": "0.06947880705627452",
+      "type": "float",
+      "line": 373
+    },
+    {
+      "flags": [
+        "-private_scale"
+      ],
+      "dest": "private_scale",
+      "default": "0.3844879738634757",
+      "type": "float",
+      "line": 374
+    },
+    {
+      "flags": [
+        "-sample_size"
+      ],
+      "dest": "sample_size",
+      "default": "512",
+      "type": "int",
+      "line": 375
+    }
+  ],
+  "integration_defaults": {
+    "mnn": 0.9086822346479394,
+    "nc": 8.21865755284329,
+    "gme": 0.2881476150721262,
+    "la": 0.9340807418916036,
+    "shared_scale": 0.06947880705627452,
+    "private_scale": 0.3844879738634757
+  },
+  "http_routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "Molo_FastAPI/app/routers/home.py",
+      "line": 12,
+      "handler": "home_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/about",
+      "source": "Molo_FastAPI/app/routers/info.py",
+      "line": 24,
+      "handler": "about_page",
+      "parameters": []
+    },
+    {
+      "method": "HEAD",
+      "path": "/about",
+      "source": "Molo_FastAPI/app/routers/info.py",
+      "line": 24,
+      "handler": "about_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/alignment/",
+      "source": "Molo_FastAPI/app/routers/alignment.py",
+      "line": 169,
+      "handler": "get_alignment_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/alignment/download/{task_id}",
+      "source": "Molo_FastAPI/app/routers/alignment.py",
+      "line": 322,
+      "handler": "download_result",
+      "parameters": [
+        {
+          "name": "task_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/analyse/alignment/run",
+      "source": "Molo_FastAPI/app/routers/alignment.py",
+      "line": 189,
+      "handler": "run_alignment",
+      "parameters": [
+        {
+          "name": "files",
+          "type": "List[UploadFile]",
+          "default": "File(default=[])"
+        },
+        {
+          "name": "mode",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "data_type",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "sp_alignment",
+          "type": "str",
+          "default": "Form('Molo')"
+        },
+        {
+          "name": "input_type",
+          "type": "str",
+          "default": "Form('upload')"
+        },
+        {
+          "name": "server_path",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "project_id",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "dataset_asset_ids",
+          "type": "Optional[List[str]]",
+          "default": "Form(default=[])"
+        },
+        {
+          "name": "dataset_name",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "tune_preset",
+          "type": "str",
+          "default": "Form('default')"
+        },
+        {
+          "name": "tune_trials",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/alignment/status/{task_id}",
+      "source": "Molo_FastAPI/app/routers/alignment.py",
+      "line": 314,
+      "handler": "get_status",
+      "parameters": [
+        {
+          "name": "task_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/downstream/artifacts/{task_id}",
+      "source": "Molo_FastAPI/app/routers/downstream.py",
+      "line": 340,
+      "handler": "get_artifacts",
+      "parameters": [
+        {
+          "name": "task_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/analyse/downstream/cancel/{task_id}",
+      "source": "Molo_FastAPI/app/routers/downstream.py",
+      "line": 362,
+      "handler": "cancel_task",
+      "parameters": [
+        {
+          "name": "task_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/downstream/preview/{task_id}/{filename:path}",
+      "source": "Molo_FastAPI/app/routers/downstream.py",
+      "line": 348,
+      "handler": "get_preview",
+      "parameters": [
+        {
+          "name": "task_id",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "filename",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/downstream/status/{task_id}",
+      "source": "Molo_FastAPI/app/routers/downstream.py",
+      "line": 332,
+      "handler": "get_status",
+      "parameters": [
+        {
+          "name": "task_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/analyse/downstream/{analysis_type}",
+      "source": "Molo_FastAPI/app/routers/downstream.py",
+      "line": 162,
+      "handler": "get_analysis_page",
+      "parameters": [
+        {
+          "name": "analysis_type",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/analyse/downstream/{analysis_type}/submit",
+      "source": "Molo_FastAPI/app/routers/downstream.py",
+      "line": 185,
+      "handler": "submit_analysis",
+      "parameters": [
+        {
+          "name": "analysis_type",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "data_source",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "file",
+          "type": "Optional[UploadFile]",
+          "default": "File(None)"
+        },
+        {
+          "name": "server_path",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "integrated_task_id",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "analysis_steps",
+          "type": "List[str]",
+          "default": "Form(default=[])"
+        },
+        {
+          "name": "resolution",
+          "type": "float",
+          "default": "Form(0.5)"
+        },
+        {
+          "name": "n_neighbors",
+          "type": "int",
+          "default": "Form(30)"
+        },
+        {
+          "name": "species",
+          "type": "str",
+          "default": "Form('mouse')"
+        },
+        {
+          "name": "n_feature_min",
+          "type": "int",
+          "default": "Form(2500)"
+        },
+        {
+          "name": "project_id",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "dataset_asset_id",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "dataset_name",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 242,
+      "handler": "me",
+      "parameters": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/password-reset/complete",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 222,
+      "handler": "complete_password_reset",
+      "parameters": [
+        {
+          "name": "payload",
+          "type": "PasswordResetCompleteRequest",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/password-reset/start",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 206,
+      "handler": "start_password_reset",
+      "parameters": [
+        {
+          "name": "payload",
+          "type": "PasswordResetStartRequest",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/complete",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 183,
+      "handler": "complete_registration",
+      "parameters": [
+        {
+          "name": "payload",
+          "type": "RegistrationCompleteRequest",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/start",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 160,
+      "handler": "start_registration",
+      "parameters": [
+        {
+          "name": "payload",
+          "type": "RegistrationStartRequest",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/datasets",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 141,
+      "handler": "list_dataset_assets",
+      "parameters": [
+        {
+          "name": "project_id",
+          "type": "Optional[str]",
+          "default": "None"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/datasets/uploads",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 157,
+      "handler": "create_upload_asset",
+      "parameters": [
+        {
+          "name": "files",
+          "type": "List[UploadFile]",
+          "default": "File(default=[])"
+        },
+        {
+          "name": "project_id",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "platform",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "default": "Form('')"
+        },
+        {
+          "name": "species",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        },
+        {
+          "name": "tissue",
+          "type": "Optional[str]",
+          "default": "Form(None)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/datasets/{asset_id}",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 148,
+      "handler": "get_dataset_asset",
+      "parameters": [
+        {
+          "name": "asset_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/datasets/{asset_id}/validate",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 185,
+      "handler": "validate_dataset_asset",
+      "parameters": [
+        {
+          "name": "asset_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 75,
+      "handler": "list_projects",
+      "parameters": [
+        {
+          "name": "include_archived",
+          "type": "bool",
+          "default": "False"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 82,
+      "handler": "create_project",
+      "parameters": [
+        {
+          "name": "payload",
+          "type": "ProjectPayload",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/{project_id}",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 100,
+      "handler": "get_project",
+      "parameters": [
+        {
+          "name": "project_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/projects/{project_id}",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 109,
+      "handler": "update_project",
+      "parameters": [
+        {
+          "name": "project_id",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "payload",
+          "type": "ProjectPatchPayload",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects/{project_id}/archive",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 122,
+      "handler": "archive_project",
+      "parameters": [
+        {
+          "name": "project_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/{project_id}/datasets",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 131,
+      "handler": "list_project_assets",
+      "parameters": [
+        {
+          "name": "project_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/auth/login",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 100,
+      "handler": "login_page",
+      "parameters": [
+        {
+          "name": "next",
+          "type": "str | None",
+          "default": "None"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 107,
+      "handler": "login",
+      "parameters": [
+        {
+          "name": "identity",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "password",
+          "type": "str",
+          "default": "Form(...)"
+        },
+        {
+          "name": "next_url",
+          "type": "str",
+          "default": "Form('/')"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 152,
+      "handler": "logout",
+      "parameters": []
+    },
+    {
+      "method": "POST",
+      "path": "/auth/reviewer-login",
+      "source": "Molo_FastAPI/app/routers/auth.py",
+      "line": 126,
+      "handler": "reviewer_login",
+      "parameters": [
+        {
+          "name": "next_url",
+          "type": "str",
+          "default": "Form('/jobs')"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/chains/asset/{asset_id}",
+      "source": "Molo_FastAPI/app/routers/chains.py",
+      "line": 56,
+      "handler": "get_chain_for_asset",
+      "parameters": [
+        {
+          "name": "asset_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/chains/job/{job_id}",
+      "source": "Molo_FastAPI/app/routers/chains.py",
+      "line": 46,
+      "handler": "get_chain_for_job",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/chains/project/{project_id}",
+      "source": "Molo_FastAPI/app/routers/chains.py",
+      "line": 66,
+      "handler": "get_chains_for_project",
+      "parameters": [
+        {
+          "name": "project_id",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "limit",
+          "type": "int",
+          "default": "Query(default=25, ge=1, le=100)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/contributors",
+      "source": "Molo_FastAPI/app/routers/info.py",
+      "line": 19,
+      "handler": "contributors_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/health/live",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 365,
+      "handler": "health_live",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/health/ready",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 370,
+      "handler": "health_ready",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/jobs",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 198,
+      "handler": "jobs_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{job_id}",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 216,
+      "handler": "get_job",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/jobs/{job_id}/cancel",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 237,
+      "handler": "cancel_job",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/jobs/{job_id}/clone",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 271,
+      "handler": "clone_job",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{job_id}/clone-template",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 228,
+      "handler": "get_clone_template",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/jobs/{job_id}/resend-email",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 290,
+      "handler": "resend_job_email",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/jobs/{job_id}/retry",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 250,
+      "handler": "retry_job",
+      "parameters": [
+        {
+          "name": "job_id",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects",
+      "source": "Molo_FastAPI/app/routers/projects.py",
+      "line": 58,
+      "handler": "projects_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/results/download/{token}",
+      "source": "Molo_FastAPI/app/routers/jobs.py",
+      "line": 328,
+      "handler": "download_result",
+      "parameters": [
+        {
+          "name": "token",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reviewer",
+      "source": "Molo_FastAPI/app/routers/reviewer.py",
+      "line": 10,
+      "handler": "reviewer_dashboard",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/tutorial",
+      "source": "Molo_FastAPI/app/routers/tutorial.py",
+      "line": 8,
+      "handler": "tutorial_page",
+      "parameters": []
+    },
+    {
+      "method": "HEAD",
+      "path": "/tutorial",
+      "source": "Molo_FastAPI/app/routers/tutorial.py",
+      "line": 8,
+      "handler": "tutorial_page",
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/update_log",
+      "source": "Molo_FastAPI/app/routers/info.py",
+      "line": 14,
+      "handler": "update_log_page",
+      "parameters": []
+    }
+  ],
+  "request_models": [
+    {
+      "name": "RegistrationStartRequest",
+      "fields": [
+        {
+          "name": "username",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "password",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "password_confirm",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "name": "RegistrationCompleteRequest",
+      "fields": [
+        {
+          "name": "challenge_id",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "code",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "name": "PasswordResetStartRequest",
+      "fields": [
+        {
+          "name": "email",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "name": "PasswordResetCompleteRequest",
+      "fields": [
+        {
+          "name": "challenge_id",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "code",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "password",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "password_confirm",
+          "type": "str",
+          "default": "required"
+        }
+      ]
+    },
+    {
+      "name": "ProjectPayload",
+      "fields": [
+        {
+          "name": "name",
+          "type": "str",
+          "default": "required"
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "default": "''"
+        },
+        {
+          "name": "species",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "tissue",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "platform",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "default_params",
+          "type": "Dict[str, Any]",
+          "default": "Field(default_factory=dict)"
+        }
+      ]
+    },
+    {
+      "name": "ProjectPatchPayload",
+      "fields": [
+        {
+          "name": "name",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "description",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "species",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "tissue",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "platform",
+          "type": "Optional[str]",
+          "default": "None"
+        },
+        {
+          "name": "default_params",
+          "type": "Optional[Dict[str, Any]]",
+          "default": "None"
+        }
+      ]
+    }
+  ]
+}

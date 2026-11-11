@@ -1,199 +1,150 @@
-# Molo Functions  
+# R function reference
 
-In this section, we provide detailed explanations of the functionalities and parameter configurations for each function in the Molo package.  
+This preserved `/api/` URL documents **R functions**. For web endpoints, use the
+[HTTP API guide](http-api.md). Defaults and signatures below are tied to the
+2026-11-11 current-source audit, not the historical Shiny release.
 
-## Molo_Create  
+Every argument and its exact default expression is in
+[Complete R parameters](reference/r-parameters.md). This page explains their roles.
 
-### Function  
-Creates a Molo object from standard-format raw data files.  
+## Molo_Create
 
-### Parameters and Meanings  
-* **data_type**: Platform type (e.g., `"Visium"`, default)  
-* **folder_path**: Directory path containing input files (default: current directory `"./"`)  
-* **n_cells**: Optional parameter specifying subset cell count (default: no restriction)  
-* **n_features**: Optional parameter specifying feature selection count (default: no restriction)  
-* **ATAC_dataset**: ATAC-seq reference genome species (options: `"mouse"` or `"human"`, default: `"mouse"`)  
-* **CODEX_type**: Multiplexed imaging platform type (default: `"processor"`)  
-* **softmax**: Whether to apply softmax normalization (logical value, default: `FALSE`)  
-* **custom_index**: Custom index column identifier (default: `"__index_level_0__"`)  
+Creates a Molo object from a platform directory. Main arguments:
 
-### Return Value  
-A constructed Molo object.  
+- `data_type`: reader/platform selector; match the exact supported spelling.
+- `folder_path`: input directory, not a ZIP file.
+- `n_cells`, `n_features`: optional sampling limits, not a replacement for QC.
+- `ATAC_dataset`, `ATAC_arrow_files`: ATAC species/reference and optional existing ArrowFiles.
+- `CODEX_type`, `softmax`: imaging input/normalization options.
+- `custom_index`: cell identifier column for Custom data.
 
-### Basic Example  
-```R  
-molo_obj <- Molo_Create(data_type = "Visium",  
-                        folder_path = "./Visium/",  
-                        n_cells = 2000,  
-                        n_features = 3000)  
+```r
+molo_obj <- Molo_Create(data_type = "Visium", folder_path = "./visium/")
 ```
 
-## Molo_reduction_cluster  
+## Molo_reduction_cluster
 
-### Function  
-Performs dimensionality reduction and clustering analysis on a Molo object.  
+Performs QC, reduction, clustering, and associated spatial/neighborhood analysis.
+Supply `obj`, `molo_plot_path`, and an appropriate `molo_env` for your machine.
 
-### Parameters and Meanings  
-* **obj**: Input Molo object  
-* **only_QC**: Whether to perform only quality control filtering (logical value)  
-* **nFeature_range**: Valid gene count range (vector format, e.g., `c(200, 2500)`)  
-* **nCount_range**: Valid UMI count range (vector format, e.g., `c(500, 15000)`)  
-* **molo_env**: Runtime configuration parameters (environment variable object)  
-* **labeled_ref**: Reference annotated dataset file path (recommended: rds-format Seurat object)  
-* **molo_plot_path**: Output directory path for result images (default: generated from environment variables)  
-* **save_type**: Result saving format (e.g., static image `"png"`/interactive image `"echarts"`)  
-* **run_Banksy**: Whether to enable Banksy spatial clustering (logical value)  
-* **image_alpha**: Spatial image transparency (numeric range 0-1)  
-* **pt_size**: Visualization point size (numeric, auto-adjusted by default)  
-* **atac_steps**: ATAC-seq processing pipeline step identifiers (character vector)  
-* **show_progress**: Whether to display progress information (logical value)  
+- R generic defaults include `resolution=0.5`, `n_neighbors=20`,
+  `nFeature_range=c(10, 2500)`, and `nCount_range=c(10,2500)`.
+- The web handler instead declares `n_neighbors=30`. These are separate interfaces.
+- `only_QC`, `run_Banksy`, `labeled_ref`, `atac_steps`, and plotting settings
+  control additional behavior. A reference annotation must have known provenance.
+- The built-in environment path is a legacy placeholder; override it explicitly.
 
-### Return Value  
-A Molo object containing dimensionality reduction embeddings and clustering labels.  
-
-### Basic Example  
-```R  
-molo_obj <- Molo_reduction_cluster(obj = molo_obj,  
-                                   only_QC = FALSE,  
-                                   nFeature_range = c(200, 2500),  
-                                   nCount_range = c(500, 15000),  
-                                   molo_plot_path = "./plots/")  
+```r
+molo_obj <- Molo_reduction_cluster(
+  obj = molo_obj,
+  molo_env = "/path/to/miniconda3/envs/Molo/",
+  molo_plot_path = "./plots/",
+  resolution = 0.5,
+  n_neighbors = 20,
+  show_progress = TRUE
+)
 ```
 
-## Molo_var_features  
+## Molo_var_features
 
-### Function  
-Identifies spatially variable features and marker genes in a Molo object.  
+Identifies/visualizes variable features. `features=NULL` lets the implementation
+select features; `sp_var_features=FALSE` is a **logical control**, not a count of
+features. The earlier tutorial's `sp_var_features=20` example was misleading.
+Supply `molo_plot_path`. Plot defaults include `save_type="graph"`,
+`image_alpha=1`, `pt_size=2`, and `show_progress=FALSE`.
 
-### Parameters and Meanings  
-* **obj**: Input Molo object  
-* **features**: Predefined feature set for analysis (optional; default: all features)  
-* **sp_var_features**: Number of top spatially variable features to select (numeric)  
-* **molo_plot_path**: Storage directory for visualization results (default: generated from environment variables)  
-* **save_type**: Output image format (e.g., static `"png"`/interactive `"echarts"`)  
-* **font_size**: Visualization text size (numeric, default: `12`)  
-* **image_alpha**: Spatial layer transparency (numeric range `0-1`, default: `0.6`)  
-* **pt_size**: Feature expression point size (numeric, default: `1.0`)  
-* **show_progress**: Whether to display progress (logical value, default: `TRUE`)  
+```r
+molo_obj <- Molo_var_features(
+  obj = molo_obj, sp_var_features = FALSE, molo_plot_path = "./plots/"
+)
+```
 
-### Return Value  
-A Molo object containing spatially variable feature analysis results.  
+## Molo_top_GO_terms
 
-### Basic Example  
-  ```R  
-molo_obj <- Molo_var_features(obj = molo_obj,  
-                                sp_var_features = 20,  
-                                molo_plot_path = "./plots/")  
-  ```
+GO enrichment for an appropriately annotated/clustered object. `dataset="mouse"`
+is the default; use `"human"` when appropriate. `plot_cols` controls group colors,
+`font_size=NULL` delegates text sizing, and `molo_plot_path` is required.
+Species/reference resources must match the input gene identifiers.
 
-## Molo_top_GO_terms  
+```r
+molo_obj <- Molo_top_GO_terms(
+  obj = molo_obj, dataset = "mouse", molo_plot_path = "./plots/"
+)
+```
 
-### Function  
-Performs GO enrichment analysis and visualizes core pathways across clusters.  
+## Molo_cell_chat
 
-### Parameters and Meanings  
-* **obj**: Molo object with cluster annotations  
-* **dataset**: Species database for gene annotation (options: `"mouse"` or `"human"`)  
-* **plot_cols**: Custom color palette for visualization (optional; uses built-in colors by default)  
-* **molo_plot_path**: Storage directory for GO result images (default: generated from environment variables)  
-* **font_size**: Visualization label text size (numeric, default: `12`)  
-* **show_progress**: Whether to display progress (logical value, default: `TRUE`)  
+CellChat-based communication analysis with `dataset="mouse"` by default. Meaningful
+cell/group annotation, a suitable ligand-receptor database, and the corresponding
+R environment are required. Missing or unsuitable data may yield no valid output;
+this is not evidence that biological communication is absent.
 
-### Return Value  
-A Molo object containing GO enrichment analysis results.  
+```r
+molo_obj <- Molo_cell_chat(
+  obj = molo_obj, dataset = "mouse", molo_plot_path = "./plots/"
+)
+```
 
-### Basic Example  
-  ```R  
-molo_obj <- Molo_top_GO_terms(obj = molo_obj,  
-                                dataset = "mouse",  
-                                molo_plot_path = "./plots/")  
-  ```
+## Molo_traj
 
-## Molo_cell_chat  
+Monocle3 trajectory inference. Requires a compatible reduced/annotated object and
+trajectory environment. `plot_cols=NULL` and `show_progress=FALSE` are the current
+generic defaults. A computed pseudotime is not a validated developmental direction.
 
-### Function  
-Performs cell-cell communication analysis using CellChat.  
+```r
+molo_obj <- Molo_traj(obj = molo_obj, molo_plot_path = "./plots/")
+```
 
-### Parameters and Meanings  
-* **obj**: Molo object with cell type annotations  
-* **plot_cols**: Custom color mapping for cell groups (optional; uses built-in colors by default)  
-* **dataset**: Species database for ligand-receptor pairs (options: `"mouse"` or `"human"`)  
-* **molo_plot_path**: Output directory for cell communication images (default: generated from environment variables)  
-* **font_size**: Visualization label text size (numeric, default: `12`)  
-* **show_progress**: Whether to display progress (logical value, default: `TRUE`)  
+## Molo_Integrate
 
-### Return Value  
-A Molo object containing CellChat analysis results.  
+Registers input Molo objects and runs integration unless `alignment_only=TRUE`.
+Full latent integration currently accepts **two objects/batches**. Important groups:
 
-### Basic Example  
-  ```R  
-molo_obj <- Molo_cell_chat(obj = molo_obj,  
-                             dataset = "mouse",  
-                             molo_plot_path = "./plots/")  
-  ```
+| Group | Parameters |
+| --- | --- |
+| Input/export | `obj_list`, `var_features`, `tmp`, `save_path`, `py_path` |
+| Compute/training | `device`, `pretrain_epoch`, `train_epoch`, `sample_size` |
+| Physical registration | `sp_alignment`, `molo_alignment_route`, `alignment_only`, `lpgw_ref_idx`, `gene_align_alpha`, `gene_glmpca_latent_dim`, `gene_overlap_frac` |
+| Geometry/plots | `plot_3D_width`, `plot_3D_height`, `plot_3D_spot_size`, `dist_threshold`, `pis_path`, `sp_alignment_s` |
+| Graph/model | `edge_type`, `edge_sp`, `edge_mtx`, `hidden_dims`, `reduction_dims`, `shared_dims` |
+| Loss/latent weights | `mse_loss`, `rec_loss`, `mnn_loss`, `nc_loss`, `gme_loss`, `la_loss`, `shared_scale`, `private_scale` |
+| Evaluation | `use_harmony`, `compute_iLISI`, `verbose` |
+| Tuning | `tuning_mode`, `tune_preset`, `tune_trials`, `tuning_objective` |
 
-## Molo_traj  
+Current R defaults include `py_path=Sys.which("python")`, `device="cuda:1"`,
+`sp_alignment="Molo+LPGW"`, `molo_alignment_route="auto"`, and
+`dist_threshold=NULL`. The website passes its own method/device values, so these
+are **not** necessarily the effective web defaults.
 
-### Function  
-Performs cell trajectory inference using Monocle3.  
+```r
+integrated_obj <- Molo_Integrate(
+  obj_list = list(molo1, molo2),
+  py_path = "/path/to/miniconda3/envs/Molo/bin/python",
+  device = "cpu",  # or a verified GPU visible to this process
+  sp_alignment = "Molo",
+  molo_alignment_route = "three_stage",
+  train_epoch = 300,
+  save_path = "./results/pairwise/",
+  tmp = "./results/pairwise/tmp/"
+)
+```
 
-### Parameters and Meanings  
-* **obj**: Molo object with dimensionality reduction results  
-* **plot_cols**: Custom color mapping for trajectories (optional; uses built-in colors by default)  
-* **molo_plot_path**: Storage directory for trajectory analysis images (default: generated from environment variables)  
-* **show_progress**: Whether to display progress (logical value, default: `TRUE`)  
+This example **overrides** the R route default to request three-stage alignment;
+`auto` does not guarantee that route. `pretrain_epoch` is recorded/passed, but do
+not infer a separately executed pretraining phase. See [defaults](parameters.md)
+and [limitations](results.md).
 
-### Return Value  
-A Molo object containing trajectory inference metadata.  
+## Molo_Convert, Molo_save_data, Molo_Pipeline
 
-### Basic Example  
-  ```R  
-molo_obj <- Molo_traj(obj = molo_obj, molo_plot_path = "./plots/")  
-  ```
+- `Molo_Convert` bridges Molo and Seurat representations. Set `start`, `end`,
+  `data_type`, `assay`, and `folder_path` as appropriate to the conversion path.
+- `Molo_save_data` exports preprocessing-dependent parquet inputs. Its
+  `prefer_sct` switch controls SCT preference; fallback scaling is not identical
+  to SCT normalization. Do not label arbitrary normalized AnnData values as SCT.
+- `Molo_Pipeline` chains downstream R functions. Its step names differ from HTTP
+  step names; see [Basic R pipeline](basic_pipeline.md).
+- `Molo_reduction_1` is a lower-level reduction helper with explicit environment
+  and plot-path arguments; prefer the documented cluster wrapper when appropriate.
 
-## Molo_Integrate  
-
-### Function  
-Performs spatial data integration using the Molo framework.  
-
-### Parameters and Meanings  
-* **obj_list**: List of input Molo objects  
-* **var_features**: Number of highly variable features to select (integer, default: `3000`)  
-* **py_path**: Python interpreter executable path (default: `"home/user/anaconda3/envs/Molo/bin/python"`)  
-* **device**: Model training device (options: `"cuda:0"`/`"cpu"`, default: `"cuda:0"`)  
-* **save_path**: Integration result storage directory (default: `"./molo_save/"`)  
-* **pretrain_epoch**: Pretraining iterations (integer, default: `100`)  
-* **train_epoch**: Main training iterations (integer, default: `300`)  
-* **tmp**: Temporary directory for intermediate files (default: `"./_molo_tmp/"`)  
-* **edge**: Edge construction strategy (character, default: `"together"`)  
-* **sp_alignment**: Spatial alignment method (character, default: `"Molo"`)  
-* **plot_3D_width**: 3D visualization image width (numeric, default: `8.0`)  
-* **plot_3D_height**: 3D visualization image height (numeric, default: `6.0`)  
-* **plot_3D_spot_size**: 3D plot point size (numeric, default: `0.5`)  
-* **dist_threshold**: Maximum spatial matching distance threshold (numeric, default: `5.0`)  
-* **pis_path**: Precomputed alignment probability file path (optional, default: `NULL`)  
-* **sp_alignment_s**: Spatial alignment regularization strength (numeric, default: `0.7`)  
-* **use_harmony**: Whether to enable Harmony integration correction (logical value, default: `FALSE`)  
-* **compute_iLISI**: Whether to compute integration quality metrics (logical value, default: `TRUE`)  
-* **edge_type**: Edge connection type (character, default: `"together"`)  
-* **edge_sp**: Spatial neighborhood edge count (integer, default: `10`)  
-* **edge_mtx**: Feature similarity edge count (integer, default: `10`)  
-* **hidden_dims**: Neural network hidden layer dimensions (integer, default: `250`)  
-* **reduction_dims**: Latent space dimensions (integer, default: `30`)  
-* **mse_loss**: Mean squared error loss weight (numeric, default: `1.0`)  
-* **tri_loss**: Triplet loss weight (numeric, default: `1.0`)  
-* **ggae_loss**: Graph autoencoder loss weight (numeric, default: `1.0`)  
-* **cos_loss**: Cosine similarity loss weight (numeric, default: `1.0`)  
-* **bce_loss**: Binary cross-entropy loss weight (numeric, default: `1.0`)  
-* **kl_loss**: KL divergence loss weight (numeric, default: `1.0`)  
-* **K_h**: Similarity scaling hyperparameter (numeric, default: `5.0`)  
-* **verbose**: Whether to display progress information (logical value, default: `TRUE`)  
-
-### Return Value  
-An integrated Molo object.  
-
-### Basic Example  
-  ```R  
-integrated_obj <- Molo_Integrate(obj_list = list(molo1, molo2),  
-                                   var_features = 3000)  
-  ```
+Full signatures, including required arguments and nullable defaults, are in
+[Complete R parameters](reference/r-parameters.md).
