@@ -26,8 +26,9 @@ interpreting model variants or scientific outputs.
 | Deploy and maintain a server | [Server deployment](deployment.md) |
 
 !!! important "Two different API references"
-    The preserved `/api/` address is the **R function reference**. Web HTTP routes
-    and authentication are covered separately in [HTTP API](http-api.md).
+    The [R function reference](api.md) and [HTTP API](http-api.md) are separate.
+    The legacy `/api/` page means R on Read the Docs but HTTP on the self-hosted
+    site; use the named links rather than assuming identical paths.
 
 ## Before interpreting a result
 

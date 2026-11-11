@@ -8,8 +8,9 @@ different interface and are not the current deployment procedure.
 
 ## Is `/api/` the HTTP API?
 
-No. That preserved address is the [R function reference](api.md).
-Use [HTTP API](http-api.md) for web routes and authentication.
+It depends on the publishing target: RTD `/api/` is the [R function reference](api.md),
+while self-hosted `/en/api/` is HTTP. Use the [HTTP API](http-api.md) link for
+web routes and authentication; do not assume identical legacy paths.
 
 ## Do I need an email code for every job?
 

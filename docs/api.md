@@ -1,6 +1,7 @@
 # R function reference
 
-This preserved `/api/` URL documents **R functions**. For web endpoints, use the
+This page documents **R functions** (RTD `/api/`; self-hosted `/en/r-functions/`).
+For web endpoints, use the
 [HTTP API guide](http-api.md). Defaults and signatures below are tied to the
 2026-11-11 current-source audit, not the historical Shiny release.
 

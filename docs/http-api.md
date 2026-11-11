@@ -1,7 +1,8 @@
 # HTTP API
 
-This page describes the **current authenticated FastAPI API**. The preserved
-[`/api/` documentation page](api.md) instead describes R functions.
+This page describes the **current authenticated FastAPI API**. The
+[R function reference](api.md) instead describes R functions. Legacy page names
+differ between publishing targets; this page is HTTP on both.
 All mounted routes, declared form arguments, and JSON models are listed in
 [Complete HTTP routes](reference/http-routes.md).
 
