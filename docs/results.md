@@ -12,7 +12,7 @@ Python CLI output is written to the requested `-save_path` instead.
 | --- | --- |
 | `Raw_Alignment_3D.png` / `.pdf` | Input coordinate preview |
 | `Molo_Alignment_3D.png` / `.pdf` | Aligned coordinate preview |
-| `matrix.parquet` | Decoder-reconstructed expression; **not original UMI counts** |
+| `matrix.parquet` | Decoder reconstruction in integration mode; input representation in alignment-only mode; **not a guarantee of original UMI counts** |
 | `embedding.parquet` | Learned latent representation |
 | `umap.parquet` | Derived visualization embedding |
 | `spatial.csv`, `meta.csv` | Coordinates and metadata |
@@ -20,7 +20,8 @@ Python CLI output is written to the requested `-save_path` instead.
 | `alignment_info.txt`, diagnostics/metrics JSON | Parameters, selected route, and available metric status |
 
 Exact files depend on method, mode, preprocessing, and completed stages.
-Alignment-only does not generate evidence of a trained integration model. Shared
+Alignment-only does not train the integration model: its saved latent/UMAP fields
+can be zero-filled format placeholders, not learned embeddings. Shared
 and private latent components have distinct meanings; the saved main embedding
 can include the complete latent representation, not only the shared component.
 

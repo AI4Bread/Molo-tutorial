@@ -14,6 +14,8 @@ authorized working-source snapshot was read without running scientific analyses.
 ## What was checked
 
 - R function signatures, including S4 generic defaults and `Molo_Integrate`.
+- Active dual-encoder training, feature decoders, translators, executed loss terms,
+  and the exported spatial-registration route selector.
 - Python `argparse` options and promoted integration defaults.
 - Only routers mounted by `app/main.py`; JSON models and form fields.
 - Registration/login, reviewer restrictions, dataset assets, queue routing,
@@ -40,7 +42,7 @@ example YAML values, and administrator configuration can differ. See
 | --- | --- |
 | [molo.ai4bread.com](https://molo.ai4bread.com/) | Primary application entry |
 | [molopipeline.site](https://molopipeline.site/) | Alternate application entry |
-| [This Read the Docs site](https://molo-docs.readthedocs.io/en/latest/) | Version-audited English documentation |
+| [This Read the Docs site](https://molo-docs.readthedocs.io/en/latest/) | Canonical English documentation and reference |
 | [Existing English guide](https://docs.molopipeline.site/en/) | Separate bilingual documentation deployment |
 
 A GitHub/Read the Docs build does not update the bilingual site's static files or

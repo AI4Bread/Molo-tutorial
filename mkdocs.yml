@@ -36,6 +36,7 @@ nav:
   - Home: index.md
   - Get started:
       - Introduction: introduction.md
+      - Model architecture: architecture.md
       - Installation: installation.md
       - Data preparation: data-preparation.md
       - Web workflow: web.md

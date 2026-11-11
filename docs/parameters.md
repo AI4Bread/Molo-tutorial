@@ -27,10 +27,10 @@ example command may deliberately override them.
 | Reconstruction | `rec_loss` | `-rec` | `1` |
 | Mutual nearest neighbors | `mnn_loss` | `-mnn` | `0.9086822346479394` |
 | Neighborhood consistency | `nc_loss` | `-nc` | `8.21865755284329` |
-| Geometric mean embedding | `gme_loss` | `-gme` | `0.2881476150721262` |
+| Within-batch geometry preservation (GME) | `gme_loss` | `-gme` | `0.2881476150721262` |
 | Latent alignment | `la_loss` | `-la` | `0.9340807418916036` |
-| Shared latent scaling | `shared_scale` | `-shared_scale` | `0.06947880705627452` |
-| Private latent scaling | `private_scale` | `-private_scale` | `0.3844879738634757` |
+| Shared KL regularization weight | `shared_scale` | `-shared_scale` | `0.06947880705627452` |
+| Private KL regularization weight | `private_scale` | `-private_scale` | `0.3844879738634757` |
 
 These six promoted nontrivial weights are selected defaults from the DLPFC
 full-model study (`trial_id=377`, `trial_number=32` in source metadata). They are
@@ -94,3 +94,7 @@ visibility, alignment route actually selected, every model parameter, seed
 behavior, versions, and output paths. Preserve real/estimated label distinctions
 and the exact metric definition. Do not merge differently normalized iLISI or
 coverage-filtered accuracy values into a single comparison.
+
+These scaling coefficients weight the KL terms, not the exported latent coordinates.
+The active LA term is translator-cycle consistency, not adversarial training.
+See [Model architecture](architecture.md) for the full executed objective.

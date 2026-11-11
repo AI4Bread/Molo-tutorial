@@ -10,6 +10,9 @@ uses **FastAPI, Celery, Redis, and SQLite**, not the historical Shiny web interf
 [Web workflow](web.md){ .md-button }
 [R functions](api.md){ .md-button }
 
+Read the [current model architecture and system design](architecture.md) before
+interpreting model variants or scientific outputs.
+
 ## Choose your workflow
 
 | You want to… | Start here |

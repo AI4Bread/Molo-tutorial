@@ -8,9 +8,33 @@ default version `latest`, language English. The site uses MkDocs Material with
 explicit English UI/search settings. Historical addresses `/api/`, `/web/`,
 `/installation/`, `/basic_pipeline/`, and `/FAQ/` remain present.
 
-The bilingual `docs.molopipeline.site` deployment is separate. The running website
-currently points its tutorial links to that site's `/en/` entry; changing this
-repository alone does not switch the application's menu or rebuild that site.
+## Two publishing targets, one English source
+
+`AI4Bread/Molo-tutorial/docs/` is the canonical English source for both sites.
+The Molo navigation dropdown preserves **Self-hosted Documentation** and
+**Read the Docs**, both opening a separate tab. No domain is removed.
+
+The bilingual deployment remains in `LPLSXYJ/molo-docs`; its English pages are
+exported from a pinned canonical Git commit instead of being maintained as a
+second divergent tutorial. Chinese pages are translations/maintenance material;
+exact parameter signatures remain in the shared generated tables.
+
+```bash
+python scripts/export_selfhosted.py --destination /path/to/molo-docs/Molo_Document
+python scripts/export_selfhosted.py --destination /path/to/molo-docs/Molo_Document --check
+```
+
+The exporter preserves old self-hosted paths: `/api/` remains HTTP API there,
+whereas RTD `/api/` is the R reference. It rewrites relative links explicitly;
+never redirect identical path strings between the two sites without a map.
+`canonical-source.json` records the revision and file hashes. Self-hosted CI checks
+that the mirror still matches that pinned revision. To publish a new revision,
+update the exported files/manifest together and review/merge it in that repository.
+Building locally or updating a server checkout does not publish GitHub Pages.
+
+If only Read the Docs is retained later, preserve the self-hosted legacy URLs
+with page-specific redirects and retain the canonical source/history. No such
+removal or domain migration is performed by this update.
 
 ## Read the Docs configuration
 

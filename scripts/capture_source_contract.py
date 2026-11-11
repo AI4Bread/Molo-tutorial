@@ -186,7 +186,13 @@ def extract(root):
               "app/services/alignment_service.py", "app/services/app_settings.py",
               "app/services/runtime_settings.py", "app/services/auth_service.py",
               "app/services/reviewer_mode.py", "app/services/dataset_validator.py",
-              "app/celery_app.py", "app/config/downstream.example.yaml", "requirements.txt"]
+              "app/celery_app.py", "app/config/downstream.example.yaml", "requirements.txt",
+              "app/core/python/modules/Molo/model.py",
+              "app/core/python/modules/Molo/compute_MNN.py",
+              "app/core/python/modules/Molo/compute_NC.py",
+              "app/core/python/modules/Molo/compute_GME.py",
+              "app/core/python/modules/Molo/image_trans.py",
+              "app/core/python/modules/Molo/molo_three_stage_alignment.py"]
     for file in extras:
         read(app / file)
     return {"schema_version": 1, "audited_on": "2026-11-11", "web_app_version": version,

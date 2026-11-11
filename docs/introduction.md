@@ -36,3 +36,9 @@ Example code is an executable template for a prepared environment, not a promise
 that every optional dependency or biological comparison has been revalidated.
 Inspect [results and limitations](results.md) before interpreting ARI, iLISI,
 reconstruction matrices, or inferred labels.
+
+## Architecture details
+
+See [Model architecture and system design](architecture.md) for the active
+dual-encoder/shared-private model, executed loss terms, spatial route selection,
+and the separation between scientific outputs and asynchronous web delivery.
